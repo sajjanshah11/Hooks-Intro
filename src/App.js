@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 let App = () => {
 
     let [count, setCount] = useState(0);
-    let [process, setProcess] = useState("processing")
+    // let [process, setProcess] = useState("processing")
 
     console.log("render was called");
 
@@ -25,10 +25,32 @@ let App = () => {
     //case 3:  
 
 
+    // useEffect(()=>{
+    //   let arr = process.split("i")
+    //   console.log(arr)
+    // },[process])
+
+
+    //cleanUp case : 1 of useEffect
+    
+    // pahile baar render karne par cleanup function bass return hota hae  next time state change karne par execute hota hae pahiley cleanup function then use effect
+    // useEffect(()=>{
+    //   console.log("use effect of case 2 was called")
+    //   return ()=>{
+    //     console.log("clean up function executed")
+    //   }
+    // })
+
+    //cleanup case :2 of use Effect
+    //in the first render clean up function was returned and gets executed only when component get unamounted from the screen
+    
+
     useEffect(()=>{
-      let arr = process.split("i")
-      console.log(arr)
-    },[process])
+      console.log("case:1 of useEffect was called");
+      return ()=>{
+        console.log("case 2 of cleanup was called");
+      }
+    },[])
 
   return (
     <div>
@@ -41,10 +63,10 @@ let App = () => {
       }}>-</button>
 
 
-      <p>{process}</p>
+      {/* <p>{process}</p>
       <button onClick = {()=>{
         setProcess("sucess");
-      }}>Click Me</button>
+      }}>Click Me</button> */}
     </div>
   );
 }
